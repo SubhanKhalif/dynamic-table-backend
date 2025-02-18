@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 require("dotenv").config(); // ✅ Load environment variables from .env
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "*" }));  // Allow all origins
 app.use(express.json());
 
 // ✅ Express-session middleware setup
@@ -251,16 +251,9 @@ app.post("/api/signup", async (req, res) => {
     }
 });
 
-
 // ✅ Default route
 app.get("/", (req, res) => {
     res.send("✅ API is running!");
-});
-
-// ✅ Start server on PORT 5000
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`🚀 Server connected to port ${PORT}`);
 });
 
 // ✅ Export app for Vercel
