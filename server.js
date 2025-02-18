@@ -13,7 +13,7 @@ app.use(express.json());
 // ✅ Express-session middleware setup
 app.use(
     session({
-        secret: process.env.SESSION_SECRET || "your_secret_key",
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }), // ✅ Store sessions in MongoDB
