@@ -22,15 +22,13 @@ app.use(
 );
 
 // ✅ Use the environment variable instead of hardcoding the connection string
-mongoose
-    .connect(process.env.MONGO_URI, {
-        serverSelectionTimeoutMS: 5000, // Set timeout
-    })
-    .then(() => console.log("✅ Connected to MongoDB Atlas"))
-    .catch((err) => {
-        console.error("❌ MongoDB Connection Error:", err);
-        process.exit(1); // Exit if connection fails
-    });
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000, // Helps with timeouts
+})
+.then(() => console.log("✅ Connected to MongoDB"))
+.catch((err) => console.error("❌ MongoDB Error:", err));
 
 // ✅ User Schema को मॉड्यूल स्तर पर परिभाषित करें
 const userSchema = new mongoose.Schema({
